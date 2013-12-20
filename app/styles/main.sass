@@ -1,9 +1,13 @@
 @import "compass/reset/utilities"
 @import "compass/css3"
 
+$carousel-height: 100px
+$carousel-image-width: 150px
+
 .container
   width: 80%
-  margin: 20px auto
+  min-width: 500px
+  margin: 10px auto
   height: auto
   overflow: hidden
 
@@ -21,8 +25,22 @@
       width: 100%
 
   .image-carousel-container
+    width: 100%
+    height: $carousel-height
+    overflow-x: scroll
+    overflow-y: hidden
+
     ul
+      height: $carousel-height
+      width: 99999px
+
       li
+        height: $carousel-height
+        list-style: none
         float: left
-        width: 24%
-        margin-right: 1%
+        margin: 0 1px 0 0
+        max-width: $carousel-image-width
+        overflow: hidden
+
+        img
+          cursor: pointer

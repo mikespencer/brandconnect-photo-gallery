@@ -333,6 +333,7 @@ module.exports = function (grunt) {
     'concat',
     'cssmin',
     'uglify',
+    'modernizr-pre',
     'modernizr',
     'copy:dist',
     'rev',
@@ -344,4 +345,16 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  // fix for modernizr request failing due to coorporate firewall:
+  // https://github.com/Modernizr/grunt-modernizr/issues/15
+  var fs = require('fs');
+  grunt.registerTask( 'modernizr-pre', function() {
+    var now = new Date();
+    grunt.file.recurse('node_modules/grunt-modernizr/lib/cache', function(abspath) {
+      fs.utimesSync(abspath, now, now);
+    });
+  });
+  grunt.registerTask('cache-modernizr', ['modernizr-pre', 'modernizr']);
+
 };
